@@ -1,0 +1,60 @@
+---
+- hosts: localhost
+  gather_facts: false
+  become: yes
+  become_user: ubuntu
+  vars:
+    ansible_python_interpreter: "/usr/bin/python3"
+  tasks:
+    # Create Kubernetes replica set
+    - name: create namespace
+      k8s:
+       name: test1
+       api_version: v1
+       kind: Namespace
+       state: present
+
+    - name: Create replicaset object
+      k8s:
+        state: present
+        definition:
+          apiVersion: apps/v1
+          kind: ReplicaSet
+          metadata:
+            name: webapp
+            namespace: default
+          spec:
+            replicas: 2
+            selector:
+              matchLabels:
+                app: node-webapp
+            template:
+              metadata:
+                labels:
+                  app: node-webapp
+              spec:
+                containers:
+                - name: springapp
+                  image: 279214042703.dkr.ecr.us-east-1.amazonaws.com/nodeapp:37
+                  ports:
+                  - containerPort: 8080
+                imagePullSecrets:
+                - name: us-east-1-ecr-registry
+
+    - name: Create a Service to access spring app
+      k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: hello-node-webapp
+            namespace: default
+          spec:
+            type: NodePort
+            ports:
+            - port: 8080
+              nodePort: 30003
+              protocol: TCP
+            selector:
+              app: node-webapp
