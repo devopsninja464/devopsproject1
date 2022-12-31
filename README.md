@@ -140,4 +140,6 @@ we used the jenkinsfile to configure the set up, whenever developer pushes the c
 		 For practice purpose, recommend to use the k3s , Lightweight Kubernetes . https://k3.io . 
 		 used k8s cluster or minikube but had issues due to instance size or memory. 
 		 Tested above installation and packages, worked fine. 
-		 if there are any issues while setting up this project, please write an email to              devopsninja464@gmail.com.  
+		 
+		 if there are any issues while setting up this project, 
+		 please write an email to devopsninja464@gmail.com.  
