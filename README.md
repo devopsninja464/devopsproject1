@@ -1,14 +1,10 @@
 ### DevOps Near RealTime Project 
 
 - In this project, we used these below tools to implement the devops near realtime project. 
-- Git, 
-Jenkins, 
-NGINX, 
-Ansible,  
-AWS ECR and
-K8s 
+- Git, Jenkins, NGINX, Ansible, AWS ECR and K8s 
 
 - Overview of the project:
+
       Developer push the nodejs code to the Github repository (SCM tool).
 	  Jenkins will pull the code from the github.
 	  Docker will build the nodeJs docker image.
@@ -18,6 +14,7 @@ K8s
 	  Write the ansible playbook to deploy the k8s cluster
 	  
 - Installation of Docker:
+
 		   sudo apt install docker.io 
 		   sudo apt update
 		   sudo apt install docker.io
@@ -28,6 +25,7 @@ K8s
 		   sudo reboot
 
 - Installation of k3s:
+
 		 curl -sfL https://get.k3s.io | sh -  
 		 curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl 
 		   chmod +x kubectl
@@ -35,7 +33,9 @@ K8s
 		  kubectl version -o yaml
 		  sudo k3s kubectl get nodes
 		  sudo k3s kubectl get pods
+
 - Installation of Ansible:
+
 		  sudo apt -y install python3-pip python3
 		  sudo pip3 install ansible
 		  ansible --version
@@ -49,6 +49,7 @@ reference for more details on k8s ansible module: https://docs.ansible.com/ansib
 kubeconfig param: Path to an existing Kubernetes config file. If not provided, and no other connection options are provided, the Kubernetes client will attempt to load the default configuration file from ~/.kube/config. Can also be specified via K8S_AUTH_KUBECONFIG environment variable.
 
 - Installation of Jenkins:
+
 		wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
    		sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 		sudo apt update
@@ -60,6 +61,7 @@ kubeconfig param: Path to an existing Kubernetes config file. If not provided, a
 		sudo systemctl status jenkins
 
 - Installation of NGINX:
+
 		 sudo apt update
 		 sudo apt install nginx
 
@@ -88,6 +90,7 @@ As jenkins need to run the ansible, we need to provide some permisison to jenkin
 for testing purposes,  jenkins ALL=(ALL) NOPASSWD: ALL added in the /etc/sudoers file. 
 
 - JenkinsFile template:
+
 		 pipeline {
 		 agent any 
 		 environment
@@ -133,6 +136,7 @@ for testing purposes,  jenkins ALL=(ALL) NOPASSWD: ALL added in the /etc/sudoers
 we used the jenkinsfile to configure the set up, whenever developer pushes the code to the github, jenkins will pull the and build docke rimage and push that image to the AWS ECR repository and then ansible will pull the image through the Kubernetes replicaset and nodejs application wil listen on the k8s service provided nodeport.
 
 -  Lesson Learned:
+
 		 For practice purpose, recommend to use the k3s , Lightweight Kubernetes . https://k3.io . 
 		 used k8s cluster or minikube but had issues due to instance size or memory. 
 		 Tested above installation and packages, worked fine. 
