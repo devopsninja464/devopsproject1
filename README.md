@@ -13,6 +13,7 @@
 	  use the Shell script to create the K8s secret object
 	  Write the ansible playbook to deploy the k8s cluster
 	  
+  
 - Installation of Docker:
 
 		   sudo apt install docker.io 
@@ -89,6 +90,11 @@ Note: we need to add jenkins user to the docker group
 As jenkins need to run the ansible, we need to provide some permisison to jenkins to communicate with the Ansible
 for testing purposes,  jenkins ALL=(ALL) NOPASSWD: ALL added in the /etc/sudoers file. 
 
+ jenkins Pipeline:
+ 
+ <img width="581" alt="jenkins_pipeline" src="https://user-images.githubusercontent.com/77762256/210119111-b8075b84-d7d0-4ae1-848c-772ff0db5bd8.png">
+
+	
 - JenkinsFile template:
 
 		 pipeline {
