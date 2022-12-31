@@ -141,6 +141,13 @@ for testing purposes,  jenkins ALL=(ALL) NOPASSWD: ALL added in the /etc/sudoers
 
 we used the jenkinsfile to configure the set up, whenever developer pushes the code to the github, jenkins will pull the and build docke rimage and push that image to the AWS ECR repository and then ansible will pull the image through the Kubernetes replicaset and nodejs application wil listen on the k8s service provided nodeport.
 
+- Execution of the project from the backend:
+
+  <img width="523" alt="k8s-2" src="https://user-images.githubusercontent.com/77762256/210119423-d552fdee-eea5-447e-a81a-cbc9c7366dbc.png">
+   <img width="817" alt="k8s-1" src="https://user-images.githubusercontent.com/77762256/210119427-dce0aa36-839b-4188-8f6b-6fee5a57406d.png">
+   
+   Application is serving here,  http://35.171.228.156:30003/ 
+
 -  Lesson Learned:
 
 		 For practice purpose, recommend to use the k3s , Lightweight Kubernetes . https://k3.io . 
